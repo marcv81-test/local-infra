@@ -6,10 +6,30 @@ provider "libvirt" {
   uri = "qemu:///system"
 }
 
-module "server" {
+resource "libvirt_network" "network" {
+  name      = "infra"
+  domain    = "infra"
+  addresses = ["192.168.100.0/24"]
+  dns {
+    enabled    = true
+    local_only = true
+  }
+}
+
+module "test-01" {
   source    = "../modules/ubuntu"
-  name      = "server"
+  name      = "test-01"
   cpu       = 1
-  memory    = 2048
+  memory    = 1024
   disk_size = 10737418240
+  network   = libvirt_network.network.name
+}
+
+module "test-02" {
+  source    = "../modules/ubuntu"
+  name      = "test-02"
+  cpu       = 1
+  memory    = 1024
+  disk_size = 10737418240
+  network   = libvirt_network.network.name
 }

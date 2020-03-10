@@ -13,16 +13,18 @@ resource "libvirt_volume" "resized" {
 
 resource "libvirt_cloudinit_disk" "cloudinit" {
   name = "${var.name}_cloudinit.img"
-
-  user_data = <<EOF
-#cloud-config
-users:
-  - name: ubuntu
-    ssh-authorized-keys:
-      - ${file("../../resources/keys/id_ubuntu.pub")}
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    shell: /bin/bash
-EOF
+  meta_data = templatefile(
+    "${path.module}/meta-data.cfg",
+    {
+      hostname = "${var.name}.${var.network}"
+    }
+  )
+  user_data = templatefile(
+    "${path.module}/user-data.cfg",
+    {
+      public_key = file("../../resources/keys/id_ubuntu.pub")
+    }
+  )
 }
 
 resource "libvirt_domain" "ubuntu" {
@@ -32,7 +34,7 @@ resource "libvirt_domain" "ubuntu" {
   autostart = true
 
   network_interface {
-    network_name = "default"
+    network_name   = var.network
     wait_for_lease = true
   }
 
