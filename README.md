@@ -11,6 +11,20 @@ Generate the SSH key.
 
 # Usage
 
+## Packer
+
+Set up virtualenv.
+
+    virtualenv -p python3
+    source venv/bin/activate
+    pip3 install -r requirements.txt
+
+Create the base image.
+
+    python3 packer/wrapper.py
+
+## Terraform
+
 Terraform the environment.
 
     cd terraform/env
