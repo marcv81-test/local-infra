@@ -21,7 +21,6 @@ module "test-01" {
   name      = "test-01"
   cpu       = 1
   memory    = 1024
-  disk_size = 10737418240
   network   = libvirt_network.network.name
 }
 
@@ -30,6 +29,5 @@ module "test-02" {
   name      = "test-02"
   cpu       = 1
   memory    = 1024
-  disk_size = 10737418240
   network   = libvirt_network.network.name
 }

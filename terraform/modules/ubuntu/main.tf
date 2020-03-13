@@ -1,14 +1,7 @@
-resource "libvirt_volume" "base" {
-  name   = "${var.name}_base.img"
-  source = "../../resources/images/eoan-server-cloudimg-amd64.img"
+resource "libvirt_volume" "root" {
+  name   = "${var.name}_root.img"
+  source = "../../resources/images/packer.img"
   format = "qcow2"
-}
-
-resource "libvirt_volume" "resized" {
-  name           = "${var.name}_resized.img"
-  base_volume_id = libvirt_volume.base.id
-  format         = "qcow2"
-  size           = var.disk_size
 }
 
 resource "libvirt_cloudinit_disk" "cloudinit" {
@@ -39,7 +32,7 @@ resource "libvirt_domain" "ubuntu" {
   }
 
   disk {
-    volume_id = libvirt_volume.resized.id
+    volume_id = libvirt_volume.root.id
   }
 
   cloudinit = libvirt_cloudinit_disk.cloudinit.id

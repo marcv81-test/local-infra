@@ -10,10 +10,6 @@ variable "memory" {
   type = number
 }
 
-variable "disk_size" {
-  type = number
-}
-
 variable "network" {
   type = string
 }
