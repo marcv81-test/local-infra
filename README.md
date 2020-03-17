@@ -22,6 +22,6 @@ Create the base image.
 
 Terraform the environment.
 
-    cd terraform/env
+    cd terraform/environments/test
     terraform init
     terraform apply
