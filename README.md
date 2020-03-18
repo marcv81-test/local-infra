@@ -6,6 +6,11 @@ Generate the SSH key.
 
     ssh-keygen -t ed25519 -f resources/keys/id_ubuntu -N '' -C 'ubuntu'
 
+Create empty disk image.
+
+    qemu-img create -f qcow2 resources/images/empty.img 10G
+    virt-format -a resources/images/empty.img --partition=gpt --filesystem=ext4
+
 ## Packer
 
 Set up virtualenv.

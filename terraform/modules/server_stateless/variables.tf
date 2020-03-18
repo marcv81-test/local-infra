@@ -13,3 +13,7 @@ variable "memory" {
 variable "network" {
   type = string
 }
+
+variable "root_image" {
+  type = string
+}

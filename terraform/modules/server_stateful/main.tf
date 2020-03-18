@@ -1,6 +1,12 @@
 resource "libvirt_volume" "root" {
   name   = "${var.name}_root.img"
-  source = "../../../resources/images/packer.img"
+  source = var.root_image
+  format = "qcow2"
+}
+
+resource "libvirt_volume" "data" {
+  name   = "${var.name}_data.img"
+  source = var.data_image
   format = "qcow2"
 }
 
@@ -16,6 +22,7 @@ resource "libvirt_cloudinit_disk" "cloudinit" {
     "${path.module}/user-data",
     {
       public_key = trimspace(file("../../../resources/keys/id_ubuntu.pub"))
+      data       = var.data_image != ""
     }
   )
 }
@@ -33,6 +40,10 @@ resource "libvirt_domain" "server" {
 
   disk {
     volume_id = libvirt_volume.root.id
+  }
+
+  disk {
+    volume_id = libvirt_volume.data.id
   }
 
   cloudinit = libvirt_cloudinit_disk.cloudinit.id

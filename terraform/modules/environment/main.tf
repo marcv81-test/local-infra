@@ -5,17 +5,20 @@ module "network" {
 }
 
 module "server_01" {
-  source  = "../server"
-  name    = "server-01"
-  cpu     = 1
-  memory  = 1024
-  network = module.network.name
+  source     = "../server_stateful"
+  name       = "server-01"
+  cpu        = 1
+  memory     = 1024
+  network    = module.network.name
+  root_image = "../../../resources/images/packer.img"
+  data_image = "../../../resources/images/empty.img"
 }
 
 module "server_02" {
-  source  = "../server"
-  name    = "server-02"
-  cpu     = 1
-  memory  = 1024
-  network = module.network.name
+  source     = "../server_stateless"
+  name       = "server-02"
+  cpu        = 1
+  memory     = 1024
+  network    = module.network.name
+  root_image = "../../../resources/images/packer.img"
 }

@@ -1,0 +1,7 @@
+#cloud-config
+users:
+  - name: ubuntu
+    ssh-authorized-keys:
+      - ${public_key}
+mounts:
+ - [ /dev/vdb1, /data ]
