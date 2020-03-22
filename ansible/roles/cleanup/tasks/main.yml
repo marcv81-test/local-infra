@@ -1,0 +1,14 @@
+---
+
+- name: Machine ID is clean
+  copy:
+    dest: /etc/machine-id
+    content: ""
+
+- name: Cloudinit is clean
+  command: cloud-init clean --logs
+
+- name: Authorized keys are clean
+  file:
+    path: /home/ubuntu/.ssh/authorized_keys
+    state: absent
