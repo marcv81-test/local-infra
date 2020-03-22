@@ -19,5 +19,5 @@ variable "root_image" {
 }
 
 variable "data_image" {
-  type    = string
+  type = string
 }
