@@ -3,5 +3,7 @@ users:
   - name: ubuntu
     ssh-authorized-keys:
       - ${public_key}
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
 mounts:
  - [ /dev/vdb1, /data ]
