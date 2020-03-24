@@ -18,8 +18,8 @@ module "server_01" {
   cpu        = 1
   memory     = 1024
   network    = module.network.name
-  root_image = "../../../resources/images/eoan-server.img"
-  data_image = "../../../resources/images/empty.img"
+  root_image = "../../../resources/images/eoan-server-5g.img"
+  data_image = "../../../resources/images/empty-10g.img"
 }
 
 module "server_02" {
@@ -28,5 +28,5 @@ module "server_02" {
   cpu        = 1
   memory     = 1024
   network    = module.network.name
-  root_image = "../../../resources/images/eoan-server.img"
+  root_image = "../../../resources/images/eoan-server-5g.img"
 }

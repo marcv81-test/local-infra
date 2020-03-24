@@ -10,10 +10,16 @@ Download the Ubuntu image.
 
     wget -O resources/images/eoan-server.img https://cloud-images.ubuntu.com/eoan/current/eoan-server-cloudimg-amd64.img
 
+Increase the Ubuntu image size.
+
+    cp resources/images/eoan-server.img resources/images/eoan-server-5g.img
+    qemu-img resize resources/images/eoan-server-5g.img 5G
+
+
 Create an empty disk image.
 
-    qemu-img create -f qcow2 resources/images/empty.img 10G
-    virt-format -a resources/images/empty.img --partition=gpt --filesystem=ext4
+    qemu-img create -f qcow2 resources/images/empty-10g.img 10G
+    virt-format -a resources/images/empty-10g.img --partition=gpt --filesystem=ext4
 
 ## Provisioning
 
